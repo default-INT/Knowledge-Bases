@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8" />
+    <title>Front-end</title>
+    <link rel="stylesheet" href="resources/css/main.css">
+    <link rel="stylesheet" href="resources/css/window-dialog.css">
+    <link rel="stylesheet" href="resources/css/catalog-list.css">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="resources/img/logo80x80.png" alt="">
+        </div>
+        <h1>
+            БАЗЫ ЗНАНИЙ В САПР
+        </h1>
+
+    </header>
+    <div class="wrapper">
+        <div class="content">
+            <nav>
+                <ul>
+                    <li><a href="http://gstu.by">ГГТУ им П.О. Сухого</a></li>
+                    <li><a href="http://vk.com">Вконтакте</a></li>
+                    <li><a href="http://youtube.com">YouTube</a></li>
+                    <li><a href="http://google.by">Google</a></li>
+                </ul>
+            </nav>
+
+            <section class="main-content">
+                <h1 id="title">Лабораторная работа №1</h1>
+                <div class="description">
+                    <div class="main-desc">
+                        <b>Цель работы: </b> Изучение  эффективности  применения  метода  Электра  для принятия решений в производственно-технологических задачах.<br>
+                    </div>
+                    <b style="font-size: 20pt;">Задание</b><br>
+                    <br>
+                    <div class="quest">
+                        1) Изучить основные особенности задач выбора альтернатив по многим критериям, виды и основные возможности методов их решения.<br>
+                        2) Решить задачу выбора оптимального решения по многим критериям.<br>
+                        <ul>Задача решается в следующем порядке:
+                            <li> Выбрать множество Парето.</li>
+                            <li> Вычислить  веса  критериев,  используя  методыэкспертного  анализа(метод ранга).</li>
+                            <li> Выполнить анализ отобранных альтернатив по методу ЭЛЕКТРА.</li>
+                        </ul>
+                        <br>
+                        <table class="employees-table">
+                            <thead>
+                                <tr>
+                                    <td>Площадка</td>
+                                    <td><a href="javascript: selectPlace(0)">Пл1</a></td>
+                                    <td><a href="javascript: selectPlace(1)">Пл2</a></td>
+                                    <td><a href="javascript: selectPlace(2)">Пл3</a></td>
+                                    <td><a href="javascript: selectPlace(3)">Пл4</a></td>
+                                    <td><a href="javascript: selectPlace(4)">Пл5</a></td>
+                                    <td><a href="javascript: selectPlace(5)">Пл6</a></td>
+                                </tr>
+                            </thead>
+                            <tbody id="tbodyPlaces">
+                                <tr id="deliveryTermsRow">
+                                    <td>Условие доставки сырья</td>
+                                    <td>Хорошие</td>
+                                    <td>Отличные</td>
+                                    <td>Средние</td>
+                                    <td>Хорошие (хуже чем в Пл1)</td>
+                                    <td>Средние</td>
+                                    <td>
+                                        Очень хорошие
+                                    </td>
+                                </tr>
+                                <tr id="expensesRow">
+                                    <td>Затраты на подготовку к строительству, млн ден.ед.</td>
+                                    <td>3,5</td>
+                                    <td>1,8</td>
+                                    <td>4</td>
+                                    <td>3</td>
+                                    <td>3,5</td>
+                                    <td>4</td>
+                                </tr>
+                                <tr id="pollutionHazardRow">
+                                    <td>Опасность загрязнения грунтовых вод в случаи аварии</td>
+                                    <td>Загрязнение возможно</td>
+                                    <td>Высокая опасность</td>
+                                    <td>Опасность мала</td>
+                                    <td>Загрязнение возможно</td>
+                                    <td>Опасность мала</td>
+                                    <td>Опасность мала</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <form id="editForm" style="display: none">
+                            <div><label>Площадка <label id="numberPlace">1</label></label></div>
+                            <div>
+                                <label>Условие доставки сырья: </label>
+                                <select name="deliveryTerms">
+                                    <option value=1>Средние</option>
+                                    <option value=2>Хорошие</option>
+                                    <option value=3>Хорошие (хуже чем в Пл1)</option>
+                                    <option value=4>Очень хорошие</option>
+                                    <option value=5>Отличные</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label>Затраты на подготовку к строительству: </label>
+                                <input type="number" name="expenses" placeholder="млн ден.ед.">
+                            </div>
+                            <div>
+                                <label>Опасность загрязнения: </label>
+                                <select name="pollutionHazard">
+                                    <option value=1>Опасность мала</option>
+                                    <option value=2>Загрязнение возможно</option>
+                                    <option value=3>Высокая опасность</option>
+                                </select>
+                            </div>
+
+                            <button type="button" onclick="acceptChange()">Применить</button>
+                        </form>
+                        <br>
+                        Важность критериев оценивается двумя экспертами.<br>
+                        По  мнению  первого  эксперта,  наиболее  важный  критерий –опасность загряз–нения, немного менее важный –затраты на подготовку к строительству, еще немного менее важный –условия для доставки сырья<br>
+                        По  мнению  второго  эксперта,  наиболее  важный  критерий –затраты  на подготовку к строительству, примерно такой же по важности (немного менее важный)–опасность загрязнения, менее важный –условиядля доставки сырья.<br>
+                    </div>
+                    <div class="result">
+                        <hr>
+                        <button onclick="init()">Определить лучшую площадку для строительства</button>
+                        <div id="msg">
+
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+            <aside>
+                <div class="link">
+                    <a href="">lab 1</a>
+                </div>
+                <div class="link">
+                    <a href="">и т.д</a>
+                </div>
+                <div class="link">
+                    <a href="">Об авторе</a>
+                </div>
+            </aside>
+        </div>
+
+        <footer>
+            <div class="footer-content">
+                <div id="about">
+                    © Евгений Трофимов ИТП-31<br>2020 г. gstu.by
+                </div>
+                <div id="time">
+
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script type="text/javascript" src="resources/js/algorithms.js"></script>
+    <script type="text/javascript" src="resources/js/main.js"></script>
+
+</body>
+</html>
